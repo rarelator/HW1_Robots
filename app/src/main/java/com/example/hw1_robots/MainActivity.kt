@@ -57,8 +57,18 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        // check to see if this is the first move to ensure the first robot is red
+        turnCount = if (isFirstMove()) 1 else turnCount
+
         setRobotTurn()
         setRobotImages()
+    }
+
+    private fun isFirstMove() : Boolean {
+        for (robot in robots) {
+            if (robot.myTurn) {return false}
+        }
+        return true
     }
 
     private fun setRobotTurn() {
