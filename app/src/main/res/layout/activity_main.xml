@@ -6,22 +6,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:gravity="center"
+    android:gravity="center_horizontal"
     tools:context=".MainActivity">
 
     <ImageView
         android:id="@+id/yellowRobot"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:translationY="-200sp"
         app:srcCompat="@drawable/king_of_detroit_robot_yellow_large" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:orientation="horizontal"
-        android:translationY="-200sp">
+        android:orientation="horizontal" >
 
         <ImageView
             android:id="@+id/redRobot"
@@ -37,34 +35,27 @@
             app:srcCompat="@drawable/king_of_detroit_robot_white_large" />
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/message_box"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="@string/begin_msg"
-        android:textSize="24sp"
-        android:translationY="-200sp" />
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:orientation="horizontal"
-        android:translationY="-200sp" >
+        android:layout_marginTop="20dp">
 
         <ImageButton
             android:id="@+id/rot_clockwise"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/rotate_button"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="0dp"
+            android:layout_marginEnd="60dp"
+            android:background="@drawable/rotate_button"
             app:srcCompat="@drawable/rot_clockwise" />
 
         <ImageButton
             android:id="@+id/rot_counter"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/rotate_button"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:background="@drawable/rotate_button"
             app:srcCompat="@drawable/rot_counter" />
     </LinearLayout>
 </LinearLayout>
