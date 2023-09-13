@@ -13,7 +13,7 @@
         android:id="@+id/yellowRobot"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:translationY="-230sp"
+        android:translationY="-200sp"
         app:srcCompat="@drawable/king_of_detroit_robot_yellow_large" />
 
     <LinearLayout
@@ -21,7 +21,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:orientation="horizontal"
-        android:translationY="-230sp">
+        android:translationY="-200sp">
 
         <ImageView
             android:id="@+id/redRobot"
@@ -44,5 +44,27 @@
         android:gravity="center"
         android:text="@string/begin_msg"
         android:textSize="24sp"
-        android:translationY="-230sp" />
+        android:translationY="-200sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:translationY="-200sp" >
+
+        <ImageButton
+            android:id="@+id/rot_clockwise"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/rotate_button"
+            app:srcCompat="@drawable/rot_clockwise" />
+
+        <ImageButton
+            android:id="@+id/rot_counter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/rotate_button"
+            app:srcCompat="@drawable/rot_counter" />
+    </LinearLayout>
 </LinearLayout>
