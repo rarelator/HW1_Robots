@@ -55,6 +55,21 @@ class MainActivity : AppCompatActivity() {
         Log.d(TAG, "onResume() entered")
     }
 
+    override fun onPause() {
+        super.onPause()
+        Log.d(TAG, "onPause() entered")
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Log.d(TAG, "onStop() entered")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.d(TAG, "onDestroy() entered")
+    }
+
     private fun toggleImage() {
         turnCount++
         if(turnCount > 3) {
