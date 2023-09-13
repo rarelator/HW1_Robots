@@ -5,9 +5,11 @@ import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import android.util.Log
+
+private const val TAG = "MainActivity"
 
 class MainActivity : AppCompatActivity() {
-
     private lateinit var redImg : ImageView
     private lateinit var whiteImg : ImageView
     private lateinit var yellowImg : ImageView
@@ -39,6 +41,18 @@ class MainActivity : AppCompatActivity() {
         redImg.setOnClickListener{view : View -> toggleImage()}
         whiteImg.setOnClickListener{view : View -> toggleImage()}
         yellowImg.setOnClickListener{view : View -> toggleImage()}
+
+        Log.d(TAG, "onCreate() entered")
+    }
+
+    override fun onStart() {
+        super.onStart()
+        Log.d(TAG, "onStart() entered")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.d(TAG, "onResume() entered")
     }
 
     private fun toggleImage() {
