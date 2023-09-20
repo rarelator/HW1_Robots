@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import android.util.Log
+import androidx.activity.viewModels
 
 private const val TAG = "MainActivity"
 
@@ -17,7 +18,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var robotImages : MutableList<ImageView>
 
-    private var turnCount = 1
+//    private var turnCount = 1
     private val robots = listOf( // immutable
         Robot(R.string.red_robot_msg, false,
             R.drawable.king_of_detroit_robot_red_large, R.drawable.king_of_detroit_robot_red_small),
@@ -26,6 +27,8 @@ class MainActivity : AppCompatActivity() {
         Robot(R.string.yellow_robot_msg, false,
             R.drawable.king_of_detroit_robot_yellow_large, R.drawable.king_of_detroit_robot_yellow_small)
     )
+
+    private val robotViewModel: RobotViewModel by viewModels();
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,6 +46,7 @@ class MainActivity : AppCompatActivity() {
         yellowImg.setOnClickListener{view : View -> toggleImage()}
 
         Log.d(TAG, "onCreate() entered")
+        Log.d(TAG, "Instance of viewModel created $robotViewModel")
     }
 
     override fun onStart() {
@@ -71,10 +75,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun toggleImage() {
-        turnCount++
-        if(turnCount > 3) {
-            turnCount = 1
-        }
+//        turnCount++
+//        if(turnCount > 3) {
+//            turnCount = 1
+//        }
 
 //        when (turnCount) {
 //            // setText is better for grabbing resources
@@ -84,6 +88,7 @@ class MainActivity : AppCompatActivity() {
 //            else -> messageBox.setText("This must be an error")
 //        }
 
+        robotViewModel.advanceTurn()
         updateMessageBox()
         setRobotTurn()
         setRobotImages()
@@ -104,12 +109,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun updateMessageBox() {
-        messageBox.setText(robots[turnCount - 1].messageResource)
+        messageBox.setText(robots[robotViewModel.getTurnCount() - 1].messageResource)
     }
+
+
 
     private fun setRobotTurn() {
         for(robot in robots) {robot.myTurn = false}
-        robots[turnCount - 1].myTurn = true
+        robots[robotViewModel.getTurnCount() - 1].myTurn = true
     }
 
     private fun setRobotImages() {
