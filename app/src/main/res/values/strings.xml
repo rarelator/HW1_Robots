@@ -4,4 +4,10 @@
     <string name="red_robot_msg">Red Robot\'s Turn</string>
     <string name="white_robot_msg">White Robot\'s Turn</string>
     <string name="yellow_robot_msg">Yellow Robot\'s Turn</string>
+    <string name="reward_A_text">Reward A</string>
+    <string name="reward_B_text">Reward B</string>
+    <string name="reward_C_text">Reward C</string>
+    <string name="reward_A_energy_amount">1</string>
+    <string name="reward_B_energy_amount">2</string>
+    <string name="reward_C_energy_amount">3</string>
 </resources>
