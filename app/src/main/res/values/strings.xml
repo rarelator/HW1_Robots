@@ -10,4 +10,7 @@
     <string name="reward_A_energy_amount">1</string>
     <string name="reward_B_energy_amount">2</string>
     <string name="reward_C_energy_amount">3</string>
+    <string name="purchased">Purchased</string>
+    <string name="insufficient">Insufficient Resources</string>
+    <string name="robot_energy">0</string>
 </resources>

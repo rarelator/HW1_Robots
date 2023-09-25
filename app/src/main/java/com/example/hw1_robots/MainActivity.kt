@@ -7,27 +7,19 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.util.Log
 import android.widget.Button
+import android.widget.Toast
 import androidx.activity.viewModels
 
 private const val TAG = "MainActivity"
 
 class MainActivity : AppCompatActivity() {
     private lateinit var yellowImg : ImageView
-    private lateinit var rewardAButton: Button
-    private lateinit var rewardBButton: Button
-    private lateinit var rewardCButton: Button
-    private lateinit var availableEnergy : TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         yellowImg = findViewById(R.id.yellowRobot)
-        rewardAButton = findViewById(R.id.rewardA)
-        rewardBButton = findViewById(R.id.rewardB)
-        rewardCButton = findViewById(R.id.rewardC)
-        availableEnergy = findViewById(R.id.availableEnergy)
-
 
 
         Log.d(TAG, "onCreate() entered")
