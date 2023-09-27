@@ -19,13 +19,14 @@
             android:id="@+id/yellowRobot"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:srcCompat="@drawable/king_of_detroit_robot_yellow_large" />
+            app:srcCompat="@drawable/king_of_detroit_robot_white_large" />
 
         <TextView
             android:id="@+id/availableEnergy"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/reward_B_energy_amount" />
+            android:text="@string/reward_B_energy_amount"
+            android:textSize="24sp" />
 
         <ImageView
             android:id="@+id/availableEnergyImage"
@@ -47,14 +48,14 @@
             android:id="@+id/rewardA"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="20dp"
+            android:layout_marginEnd="15dp"
             android:text="@string/reward_A_text" />
 
         <Button
             android:id="@+id/rewardB"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="20dp"
+            android:layout_marginEnd="15dp"
             android:text="@string/reward_B_text" />
 
         <Button
@@ -74,26 +75,28 @@
             android:id="@+id/rewardAEnergy"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/reward_A_energy_amount" />
+            android:text="@string/reward_A_energy_amount"
+            android:textSize="24sp" />
 
         <ImageView
             android:id="@+id/rewardAEnergyImage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="90dp"
+            android:layout_marginEnd="80dp"
             app:srcCompat="@drawable/energy_counter" />
 
         <TextView
             android:id="@+id/rewardBEnergy"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/reward_B_energy_amount" />
+            android:text="@string/reward_B_energy_amount"
+            android:textSize="24sp" />
 
         <ImageView
             android:id="@+id/rewardBEnergyImage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="70dp"
+            android:layout_marginEnd="60dp"
             app:srcCompat="@drawable/energy_counter" />
 
         <TextView
@@ -101,7 +104,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:text="@string/reward_C_energy_amount" />
+            android:text="@string/reward_C_energy_amount"
+            android:textSize="24sp" />
 
         <ImageView
             android:id="@+id/rewardCEnergyImage"

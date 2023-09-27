@@ -9,6 +9,12 @@
     android:gravity="center"
     tools:context=".MainActivity">
 
+    <ImageView
+        android:id="@+id/yellowRobot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/king_of_detroit_robot_yellow_large" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -16,99 +22,30 @@
         android:gravity="center">
 
         <ImageView
-            android:id="@+id/yellowRobot"
+            android:id="@+id/redRobot"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:srcCompat="@drawable/king_of_detroit_robot_yellow_large" />
-
-        <TextView
-            android:id="@+id/availableEnergy"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/reward_B_energy_amount" />
+            app:layout_constraintStart_toEndOf="@+id/imageView"
+            app:srcCompat="@drawable/king_of_detroit_robot_red_large" />
 
         <ImageView
-            android:id="@+id/availableEnergyImage"
+            android:id="@+id/whiteRobot"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:srcCompat="@drawable/energy_counter" />
-
-
+            app:srcCompat="@drawable/king_of_detroit_robot_white_large" />
     </LinearLayout>
 
-    <LinearLayout
+    <TextView
+        android:id="@+id/message_box"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center">
+        android:gravity="center"
+        android:text="@string/begin_msg"
+        android:textSize="24sp" />
 
-
-        <Button
-            android:id="@+id/rewardA"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="20dp"
-            android:text="@string/reward_A_text" />
-
-        <Button
-            android:id="@+id/rewardB"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="20dp"
-            android:text="@string/reward_B_text" />
-
-        <Button
-            android:id="@+id/rewardC"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:text="@string/reward_C_text" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
+    <Button
+        android:id="@+id/purchase_reward_button"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center">
-
-        <TextView
-            android:id="@+id/rewardAEnergy"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/reward_A_energy_amount" />
-
-        <ImageView
-            android:id="@+id/rewardAEnergyImage"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="90dp"
-            app:srcCompat="@drawable/energy_counter" />
-
-        <TextView
-            android:id="@+id/rewardBEnergy"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/reward_B_energy_amount" />
-
-        <ImageView
-            android:id="@+id/rewardBEnergyImage"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="70dp"
-            app:srcCompat="@drawable/energy_counter" />
-
-        <TextView
-            android:id="@+id/rewardCEnergy"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:text="@string/reward_C_energy_amount" />
-
-        <ImageView
-            android:id="@+id/rewardCEnergyImage"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/energy_counter" />
-
-    </LinearLayout>
-
+        android:text="Go to next activity" />
 </LinearLayout>

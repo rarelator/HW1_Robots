@@ -7,6 +7,7 @@
     <string name="reward_A_text">Reward A</string>
     <string name="reward_B_text">Reward B</string>
     <string name="reward_C_text">Reward C</string>
+    <string name="error_reward">Unknown Item</string>
     <string name="reward_A_energy_amount">1</string>
     <string name="reward_B_energy_amount">2</string>
     <string name="reward_C_energy_amount">3</string>

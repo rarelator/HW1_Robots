@@ -1,5 +1,7 @@
 package com.example.hw1_robots
 
+import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -7,6 +9,7 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 
+private const val EXTRA_ROBOT_ENERGY = "com.example.hw1_robots.current_robot_energy"
 class RobotPurchase : AppCompatActivity() {
     private lateinit var rewardAButton: Button
     private lateinit var rewardBButton: Button
@@ -22,7 +25,8 @@ class RobotPurchase : AppCompatActivity() {
         rewardCButton = findViewById(R.id.rewardC)
         availableEnergy = findViewById(R.id.availableEnergy)
 
-        robotEnergy = 2
+        //robotEnergy = 2 // Hardcoded for now
+        robotEnergy = intent.getIntExtra(EXTRA_ROBOT_ENERGY, 6)
         availableEnergy.setText(robotEnergy.toString())
 
         rewardAButton.setOnClickListener{view : View ->
@@ -36,11 +40,25 @@ class RobotPurchase : AppCompatActivity() {
         }
     }
 
+    // Like a constructor
+    companion object {
+        fun newIntent(packageContext: Context, robotEnergy : Int) : Intent {
+            return Intent(packageContext, RobotPurchase::class.java).apply {
+                putExtra(EXTRA_ROBOT_ENERGY, robotEnergy)
+            }
+        }
+    }
+
     private fun makePurchase(costOfPurchase : Int){
         if (robotEnergy >= costOfPurchase){
-            val s1 = getString(R.string.reward_C_text)
+            val s1 = when (costOfPurchase) {
+                1 -> getString(R.string.reward_A_text)
+                2 -> getString(R.string.reward_B_text)
+                3 -> getString(R.string.reward_C_text)
+                else -> getString(R.string.error_reward)
+            }
             val s2 = getString(R.string.purchased)
-            val s3 = s1 + " " + s2
+            val s3 = "$s1 $s2"
             robotEnergy -= costOfPurchase
             availableEnergy.setText(robotEnergy.toString())
             Toast.makeText(this, s3, Toast.LENGTH_SHORT).show()
