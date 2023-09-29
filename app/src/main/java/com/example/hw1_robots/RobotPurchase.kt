@@ -16,6 +16,7 @@ class RobotPurchase : AppCompatActivity() {
     private lateinit var rewardCButton: Button
     private lateinit var availableEnergy : TextView
     private var robotEnergy = 0
+    private var numPurchases = 0;
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_robot_purchase)
@@ -60,6 +61,9 @@ class RobotPurchase : AppCompatActivity() {
             val s2 = getString(R.string.purchased)
             val s3 = "$s1 $s2"
             robotEnergy -= costOfPurchase
+            numPurchases++
+            val intent = MainActivity.newIntent(this, numPurchases)
+            startActivity(intent)
             availableEnergy.setText(robotEnergy.toString())
             Toast.makeText(this, s3, Toast.LENGTH_SHORT).show()
         }else{
