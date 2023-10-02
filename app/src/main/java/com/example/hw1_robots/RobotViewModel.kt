@@ -1,13 +1,19 @@
 package com.example.hw1_robots
 
 import android.util.Log
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 
 private const val TAG = "RobotViewModel"
-class RobotViewModel : ViewModel() {
+const val MADE_PURCHASE_KEY = "MADE_PURCHASE_KEY"
+class RobotViewModel(private val savedStateHandle: SavedStateHandle) : ViewModel() {
     init {
         Log.d(TAG, "Instance of RobotViewModel created")
     }
+
+    var lastPurchaseMade : Int
+        get() = savedStateHandle.get(MADE_PURCHASE_KEY) ?: 0
+        set(value) = savedStateHandle.set(MADE_PURCHASE_KEY, value)
 
     override fun onCleared() {
         super.onCleared()
