@@ -45,21 +45,21 @@
 
 
         <Button
-            android:id="@+id/rewardA"
+            android:id="@+id/reward1"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="15dp"
             android:text="@string/reward_A_text" />
 
         <Button
-            android:id="@+id/rewardB"
+            android:id="@+id/reward2"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="15dp"
             android:text="@string/reward_B_text" />
 
         <Button
-            android:id="@+id/rewardC"
+            android:id="@+id/reward3"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:text="@string/reward_C_text" />
@@ -72,7 +72,7 @@
         android:gravity="center">
 
         <TextView
-            android:id="@+id/rewardAEnergy"
+            android:id="@+id/reward1Energy"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/reward_A_energy_amount"
@@ -86,7 +86,7 @@
             app:srcCompat="@drawable/energy_counter" />
 
         <TextView
-            android:id="@+id/rewardBEnergy"
+            android:id="@+id/reward2Energy"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/reward_B_energy_amount"
@@ -100,7 +100,7 @@
             app:srcCompat="@drawable/energy_counter" />
 
         <TextView
-            android:id="@+id/rewardCEnergy"
+            android:id="@+id/reward3Energy"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"

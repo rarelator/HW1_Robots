@@ -74,9 +74,10 @@ class MainActivity : AppCompatActivity() {
     private val purchaseLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){ result ->
         if (result.resultCode == RESULT_OK) {
             // Capture the data for the TOAST
-            val data = result.data?.getIntExtra(EXTRA_ROBOT_PURCHASE_MADE, 0) ?: 0
-            if (data != 0) {
+            val data = result.data?.getStringExtra(EXTRA_ROBOT_PURCHASE_MADE) ?: ""
+            if (data != "") {
                 robotViewModel.purchases[robotViewModel.getTurnCount()]?.add(data)
+                robots[robotViewModel.getTurnCount() - 1].myEnergy -= robotViewModel.rewards[data]!!
             }
         }
     }
@@ -122,13 +123,8 @@ class MainActivity : AppCompatActivity() {
         robots[robotViewModel.getTurnCount() - 1].myTurn = true
         robots[robotViewModel.getTurnCount() - 1].myEnergy += 1
 
-        if (robotViewModel.lastPurchaseMade != 0) {
-            val s1 = when (robotViewModel.lastPurchaseMade) {
-                1 -> getString(R.string.reward_A_text)
-                2 -> getString(R.string.reward_B_text)
-                3 -> getString(R.string.reward_C_text)
-                else -> getString(R.string.error_reward)
-            }
+        if (robotViewModel.lastPurchaseMade != "") {
+            val s1 = robotViewModel.lastPurchaseMade
             val s2 = when (robotViewModel.getTurnCount()) {
                 1 -> "Red Robot"
                 2 -> "White Robot"
