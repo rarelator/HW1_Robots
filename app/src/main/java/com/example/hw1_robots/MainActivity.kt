@@ -74,22 +74,10 @@ class MainActivity : AppCompatActivity() {
     private val purchaseLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){ result ->
         if (result.resultCode == RESULT_OK) {
             // Capture the data for the TOAST
-            robotViewModel.lastPurchaseMade = result.data?.getIntExtra(EXTRA_ROBOT_PURCHASE_MADE, 0) ?: 0
-
-            val s1 = when (robotViewModel.lastPurchaseMade) {
-                1 -> getString(R.string.reward_A_text)
-                2 -> getString(R.string.reward_B_text)
-                3 -> getString(R.string.reward_C_text)
-                else -> getString(R.string.error_reward)
+            val data = result.data?.getIntExtra(EXTRA_ROBOT_PURCHASE_MADE, 0) ?: 0
+            if (data != 0) {
+                robotViewModel.purchases[robotViewModel.getTurnCount()]?.add(data)
             }
-            val s2 = when (robotViewModel.getTurnCount()) {
-                1 -> "Red Robot"
-                2 -> "White Robot"
-                3 -> "Yellow Robot"
-                else -> ""
-            }
-            val s3 = "$s2 $s1"
-            Toast.makeText(this, "$s2 Purchased $s1", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -133,6 +121,23 @@ class MainActivity : AppCompatActivity() {
         for(robot in robots) {robot.myTurn = false}
         robots[robotViewModel.getTurnCount() - 1].myTurn = true
         robots[robotViewModel.getTurnCount() - 1].myEnergy += 1
+
+        if (robotViewModel.lastPurchaseMade != 0) {
+            val s1 = when (robotViewModel.lastPurchaseMade) {
+                1 -> getString(R.string.reward_A_text)
+                2 -> getString(R.string.reward_B_text)
+                3 -> getString(R.string.reward_C_text)
+                else -> getString(R.string.error_reward)
+            }
+            val s2 = when (robotViewModel.getTurnCount()) {
+                1 -> "Red Robot"
+                2 -> "White Robot"
+                3 -> "Yellow Robot"
+                else -> ""
+            }
+            val s3 = "$s2 $s1"
+            Toast.makeText(this, "$s2 Purchased $s1", Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun setRobotImages() {

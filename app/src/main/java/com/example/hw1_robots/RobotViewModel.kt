@@ -11,9 +11,15 @@ class RobotViewModel(private val savedStateHandle: SavedStateHandle) : ViewModel
         Log.d(TAG, "Instance of RobotViewModel created")
     }
 
-    var lastPurchaseMade : Int
-        get() = savedStateHandle.get(MADE_PURCHASE_KEY) ?: 0
-        set(value) = savedStateHandle.set(MADE_PURCHASE_KEY, value)
+    // Initialize the purchases map with the turn count being the keys
+    // and a list of reward purchases as the values
+    var purchases: Map<Int, MutableList<Int>> = mapOf(1 to mutableListOf(0), 2 to mutableListOf(0), 3 to mutableListOf(0) )
+//    var lastPurchaseMade : Int
+//        get() = savedStateHandle.get(MADE_PURCHASE_KEY) ?: 0
+//        set(value) = savedStateHandle.set(MADE_PURCHASE_KEY, value)
+
+    val lastPurchaseMade : Int
+        get() = purchases[getTurnCount()]?.last() ?: 0
 
     override fun onCleared() {
         super.onCleared()
