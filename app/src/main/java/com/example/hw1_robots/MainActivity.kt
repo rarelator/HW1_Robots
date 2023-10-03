@@ -77,6 +77,7 @@ class MainActivity : AppCompatActivity() {
             val data = result.data?.getIntExtra(EXTRA_ROBOT_PURCHASE_MADE, 0) ?: 0
             if (data != 0) {
                 robotViewModel.purchases[robotViewModel.getTurnCount()]?.add(data)
+                robots[robotViewModel.getTurnCount() - 1].myEnergy -= data
             }
         }
     }
