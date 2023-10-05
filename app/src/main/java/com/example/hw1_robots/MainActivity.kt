@@ -23,8 +23,6 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var robotImages : MutableList<ImageView>
 
-    private var latestPurchaseCost = 0
-
     private val robots = listOf( // immutable
         Robot(R.string.red_robot_msg, false,
             R.drawable.king_of_detroit_robot_red_large, R.drawable.king_of_detroit_robot_red_small, 0),
