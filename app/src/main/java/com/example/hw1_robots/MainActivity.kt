@@ -23,8 +23,6 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var robotImages : MutableList<ImageView>
 
-    private var latestPurchaseCost = 0
-
     private val robots = listOf( // immutable
         Robot(R.string.red_robot_msg, false,
             R.drawable.king_of_detroit_robot_red_large, R.drawable.king_of_detroit_robot_red_small, 0),
@@ -58,12 +56,7 @@ class MainActivity : AppCompatActivity() {
         whiteImg.setOnClickListener{view : View -> toggleImage()}
         yellowImg.setOnClickListener{view : View -> toggleImage()}
         reward_button.setOnClickListener{view : View ->
-            // Toast.makeText(this, "Going to make a purchase", Toast.LENGTH_SHORT).show()
-            // passing in the activity that is making the call
-            // val intent = Intent(this, RobotPurchase::class.java)
-            // intent.putExtra(EXTRA_ROBOT_ENERGY, robots[robotViewModel.getTurnCount() - 1].myEnergy)
             val intent = RobotPurchase.newIntent(this, robots[robotViewModel.getTurnCount() - 1].myEnergy)
-            // startActivity(intent)
             purchaseLauncher.launch(intent)
         }
 

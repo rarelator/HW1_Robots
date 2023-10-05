@@ -5,7 +5,6 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 
 private const val TAG = "RobotViewModel"
-const val MADE_PURCHASE_KEY = "MADE_PURCHASE_KEY"
 class RobotViewModel(private val savedStateHandle: SavedStateHandle) : ViewModel() {
     init {
         Log.d(TAG, "Instance of RobotViewModel created")
@@ -14,9 +13,6 @@ class RobotViewModel(private val savedStateHandle: SavedStateHandle) : ViewModel
     // Initialize the purchases map with the turn count being the keys
     // and a list of reward purchases as the values
     var purchases: Map<Int, MutableList<Int>> = mapOf(1 to mutableListOf(0), 2 to mutableListOf(0), 3 to mutableListOf(0) )
-//    var lastPurchaseMade : Int
-//        get() = savedStateHandle.get(MADE_PURCHASE_KEY) ?: 0
-//        set(value) = savedStateHandle.set(MADE_PURCHASE_KEY, value)
 
     val lastPurchaseMade : Int
         get() = purchases[getTurnCount()]?.last() ?: 0
