@@ -11,18 +11,28 @@ class RobotViewModel(private val savedStateHandle: SavedStateHandle) : ViewModel
         Log.d(TAG, "Instance of RobotViewModel created")
     }
 
+    // Used by both MainActivity and RobotPurchase
+    val rewards : Map<String, Int>
+        get() = mapOf("A" to 1, "B" to 2, "C" to 3,
+            "D" to 3, "E" to 4, "F" to 4, "G" to 7)
+
+    // Get 3 random rewards
+    val rewardNames : MutableList<String> = rewards.keys.toList().asSequence().shuffled().take(3).toMutableList()
+
     // Initialize the purchases map with the turn count being the keys
     // and a list of reward purchases as the values
-    var purchases: Map<Int, MutableList<String>> = mapOf(1 to mutableListOf(""), 2 to mutableListOf(""), 3 to mutableListOf("") )
-//    var lastPurchaseMade : Int
-//        get() = savedStateHandle.get(MADE_PURCHASE_KEY) ?: 0
-//        set(value) = savedStateHandle.set(MADE_PURCHASE_KEY, value)
+    var purchases: Map<Int, ArrayList<String>> = mapOf(1 to arrayListOf(), 2 to arrayListOf(), 3 to arrayListOf() )
 
-    var rewards : Map<String, Int> = mapOf("Reward A" to 1, "Reward B" to 2, "Reward C" to 3,
-        "Reward D" to 3, "Reward E" to 4, "Reward F" to 4, "Reward G" to 7)
+    var robotEnergies : MutableMap<Int, Int> = mutableMapOf(1 to 0, 2 to 0, 3 to 0)
 
-    val lastPurchaseMade : String
-        get() = purchases[getTurnCount()]?.last() ?: ""
+    //Mainly used in MainActivity
+    val purchasesMade : MutableList<String>
+        get() = purchases[getTurnCount()] ?: mutableListOf()
+
+    // Mainly used in RobotPurchase
+    var robotEnergy = 0
+
+    var enabledButtons : ArrayList<Boolean> = arrayListOf(true, true, true)
 
     override fun onCleared() {
         super.onCleared()

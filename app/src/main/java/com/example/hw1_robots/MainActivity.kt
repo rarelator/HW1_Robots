@@ -9,7 +9,6 @@ import android.widget.TextView
 import android.util.Log
 import android.widget.Button
 import android.widget.Toast
-import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 
@@ -19,11 +18,9 @@ class MainActivity : AppCompatActivity() {
     private lateinit var whiteImg : ImageView
     private lateinit var yellowImg : ImageView
     private lateinit var messageBox : TextView
-    private lateinit var reward_button : Button
+    private lateinit var rewardButton : Button
 
     private lateinit var robotImages : MutableList<ImageView>
-
-    private var latestPurchaseCost = 0
 
     private val robots = listOf( // immutable
         Robot(R.string.red_robot_msg, false,
@@ -34,7 +31,7 @@ class MainActivity : AppCompatActivity() {
             R.drawable.king_of_detroit_robot_yellow_large, R.drawable.king_of_detroit_robot_yellow_small, 0)
     )
 
-    private val robotViewModel: RobotViewModel by viewModels();
+    private val robotViewModel: RobotViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,27 +41,24 @@ class MainActivity : AppCompatActivity() {
         whiteImg = findViewById(R.id.whiteRobot)
         yellowImg = findViewById(R.id.yellowRobot)
         messageBox = findViewById(R.id.message_box)
-        reward_button = findViewById(R.id.purchase_reward_button)
+        rewardButton = findViewById(R.id.purchase_reward_button)
 
         robotImages = mutableListOf(redImg, whiteImg, yellowImg)
 
         if (robotViewModel.getTurnCount() > 0) {
             updateMessageBox()
-            setRobotTurn()
+            setRobotTurn(true)
             setRobotImages()
         }
 
         redImg.setOnClickListener{view : View -> toggleImage()}
         whiteImg.setOnClickListener{view : View -> toggleImage()}
         yellowImg.setOnClickListener{view : View -> toggleImage()}
-        reward_button.setOnClickListener{view : View ->
-            // Toast.makeText(this, "Going to make a purchase", Toast.LENGTH_SHORT).show()
-            // passing in the activity that is making the call
-            // val intent = Intent(this, RobotPurchase::class.java)
-            // intent.putExtra(EXTRA_ROBOT_ENERGY, robots[robotViewModel.getTurnCount() - 1].myEnergy)
-            val intent = RobotPurchase.newIntent(this, robots[robotViewModel.getTurnCount() - 1].myEnergy)
-            // startActivity(intent)
-            purchaseLauncher.launch(intent)
+        rewardButton.setOnClickListener{view : View ->
+            if (robotViewModel.getTurnCount() != 0) {
+                val intent = RobotPurchase.newIntent(this, robotViewModel.robotEnergies[robotViewModel.getTurnCount()]!!, robotViewModel.getTurnCount() - 1)
+                purchaseLauncher.launch(intent)
+            }
         }
 
         Log.d(TAG, "onCreate() entered")
@@ -74,10 +68,13 @@ class MainActivity : AppCompatActivity() {
     private val purchaseLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){ result ->
         if (result.resultCode == RESULT_OK) {
             // Capture the data for the TOAST
-            val data = result.data?.getStringExtra(EXTRA_ROBOT_PURCHASE_MADE) ?: ""
-            if (data != "") {
-                robotViewModel.purchases[robotViewModel.getTurnCount()]?.add(data)
-                robots[robotViewModel.getTurnCount() - 1].myEnergy -= robotViewModel.rewards[data]!!
+            val data = result.data?.getStringArrayListExtra(EXTRA_ROBOT_PURCHASE_MADE_LIST) ?: arrayListOf()
+            if (data.isNotEmpty()) {
+                for (reward in data) {
+                    robotViewModel.purchases[robotViewModel.getTurnCount()]?.add(reward)
+                    robotViewModel.robotEnergies[robotViewModel.getTurnCount()] =
+                        robotViewModel.robotEnergies[robotViewModel.getTurnCount()]!! - robotViewModel.rewards[reward]!!
+                }
             }
         }
     }
@@ -110,7 +107,7 @@ class MainActivity : AppCompatActivity() {
     private fun toggleImage() {
         robotViewModel.advanceTurn()
         updateMessageBox()
-        setRobotTurn()
+        setRobotTurn(false)
         setRobotImages()
     }
 
@@ -118,21 +115,21 @@ class MainActivity : AppCompatActivity() {
         messageBox.setText(robots[robotViewModel.getTurnCount() - 1].messageResource)
     }
 
-    private fun setRobotTurn() {
+    private fun setRobotTurn(suppressEnergy : Boolean) {
         for(robot in robots) {robot.myTurn = false}
         robots[robotViewModel.getTurnCount() - 1].myTurn = true
-        robots[robotViewModel.getTurnCount() - 1].myEnergy += 1
+        if (!suppressEnergy) robotViewModel.robotEnergies[robotViewModel.getTurnCount()] =
+            robotViewModel.robotEnergies[robotViewModel.getTurnCount()]!! + 1
 
-        if (robotViewModel.lastPurchaseMade != "") {
-            val s1 = robotViewModel.lastPurchaseMade
-            val s2 = when (robotViewModel.getTurnCount()) {
+        if (robotViewModel.purchasesMade.isNotEmpty()) {
+            val purchases = robotViewModel.purchasesMade.joinToString(", ")
+            val robotName = when (robotViewModel.getTurnCount()) {
                 1 -> "Red Robot"
                 2 -> "White Robot"
                 3 -> "Yellow Robot"
                 else -> ""
             }
-            val s3 = "$s2 $s1"
-            Toast.makeText(this, "$s2 Purchased $s1", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "$robotName Purchased $purchases", Toast.LENGTH_SHORT).show()
         }
     }
 

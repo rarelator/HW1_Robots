@@ -16,7 +16,7 @@
         android:gravity="center">
 
         <ImageView
-            android:id="@+id/yellowRobot"
+            android:id="@+id/robot"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:srcCompat="@drawable/king_of_detroit_robot_white_large" />
